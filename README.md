@@ -4,6 +4,8 @@ infscroll
 A simple exaple of an animated, infinitely scrolling list in Stingray.
 Implemented in Scaleform Studio with Lua scripts.
 
+![](https://github.com/randrew/infscroll/wiki/demo.gif)
+
 Usage
 -----
 
