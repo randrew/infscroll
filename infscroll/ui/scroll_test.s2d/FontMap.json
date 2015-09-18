@@ -1,0 +1,15 @@
+{
+  "configs": [
+    {
+      "name": "Default",
+      "map": [
+        {
+          "Normal": {"font": "Sans", "style": "Original", "scaleFactor": "1.0" }
+        },
+        {
+          "Title": {"font": "Sans", "style": "Bold", "scaleFactor": "1.0"}
+        }
+      ]
+    }
+  ]
+}
