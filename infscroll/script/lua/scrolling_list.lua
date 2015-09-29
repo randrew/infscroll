@@ -252,7 +252,7 @@ local function process_scroll_input(scroller, dt)
 end
 
 local function tick_scroll_position(scroller, dt)
-	scroller.scroll_offset = Utils.weighted_average(scroller.scroll_offset, scroller.target_scroll_offset, 0.0001, dt)
+	scroller.scroll_offset = Utils.weighted_average(scroller.scroll_offset, scroller.target_scroll_offset, scroller.scrolling_interpolation_fraction, dt)
 end
 
 local function update_scroller_data(scroller)
@@ -309,7 +309,9 @@ function Scroller.create(args)
 		view_set_visible_fn=args.view_set_visible,
 		view_set_position_fn=args.view_set_position,
 
-		discrete_inertia_fraction=args.discrete_inertia_fraction or 0.015
+		-- TODO better names for these, docs
+		discrete_inertia_fraction=args.discrete_inertia_fraction or 0.015,
+		scrolling_interpolation_fraction=args.scrolling_interpolation_fraction or 0.0001
 	}
 end
 
