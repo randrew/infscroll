@@ -242,7 +242,7 @@ local function process_scroll_input(scroller, dt)
 	end
 
 	-- Increase inertia along the direction of the scroll input.
-	inertia = inertia + (scroll_delta * 0.015)
+	inertia = inertia + (scroll_delta * scroller.discrete_inertia_fraction)
 	-- Modify the input scroll delta by inertia.
 	scroll_delta = scroll_delta + scroll_delta * math.abs(inertia)
 	-- Set new inertia to the scrolling list state.
@@ -307,7 +307,9 @@ function Scroller.create(args)
 		release_view_fn=args.view_release,
 		set_data_fn=args.view_set_data,
 		view_set_visible_fn=args.view_set_visible,
-		view_set_position_fn=args.view_set_position
+		view_set_position_fn=args.view_set_position,
+
+		discrete_inertia_fraction=args.discrete_inertia_fraction or 0.015
 	}
 end
 
