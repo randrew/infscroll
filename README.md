@@ -55,7 +55,6 @@ procedure, Scroller.create().
 		view_take=function(data) : view,
 		view_release=function(view) : nil,
 		view_set_data=function(view, data) : nil,
-		view_set_visible=function(view, bool) : nil,
 		view_set_position=function(view, number) : nil
 	}
 
@@ -123,7 +122,9 @@ need to make this do anything unless you are pooling your view types, but it's
 recommended that you do so.
 
 Examples of `view_take` and `view_release` with pooling behavior can be found
-in ui_main.lua.
+in ui_main.lua. If you are implementing pooling for your actors, you should
+also use these functions to add or remove your Actors from whatever container
+you are putting them in within the Scaleform stage.
 
 `view_set_data` is a function which takes two arguments, a view, and a data to
 display. Your code is responsible for doing the rest. This is likely where you
@@ -134,11 +135,6 @@ what's in your data.
 		scaleform.TextComponent.set_text(view.text_component, data.my_text)
 		...
 	end
-
-`view_set_visible` is a function which takes two arguments, a view, and
-whether or not it should be visible at all. You should use this function to
-add or remove your Actors from whatever container you are putting them in
-within the Scaleform stage.
 
 `view_set_position` is a function which takes two arguments, a view, and a
 number which is its location in the list along the direction it scrolls. You
