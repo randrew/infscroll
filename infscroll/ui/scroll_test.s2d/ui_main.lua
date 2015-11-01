@@ -71,7 +71,7 @@ local function view_set_visible(view, is_visible)
 	if is_visible then
 		ContainerComponent.add_actor(child_container, view.actor)
 	else
-		ContainerComponent.remove_actor(child_container, view.actor)
+		ContainerComponent.remove_actor(child_container, view.actor, false)
 	end
 end
 

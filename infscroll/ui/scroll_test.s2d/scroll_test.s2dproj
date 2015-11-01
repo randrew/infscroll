@@ -34,10 +34,12 @@
 				"bSnapToGuidesEnabled": true,
 				"StageBorderSize": 18.000000,
 				"HorizontalSpacing": 0.000000,
-				"VerticalSpacing": 0.000000
+				"VerticalSpacing": 0.000000,
+				"SnapThreshold": 8.000000,
+				"AnchorThreshold": 15.000000
 			},
 			"@meta": {
-				"@id": 2808166424,
+				"@id": 15353626,
 				"@typeid": 153080644
 			}
 		}
@@ -69,7 +71,7 @@
 			"Scaleform::VGx::Data::SnappingOptions": {
 				"@typename": "Scaleform::VGx::Data::SnappingOptions",
 				"@typeid": 97839827,
-				"@version": 1
+				"@version": 2
 			}
 		}
 	}

@@ -29,7 +29,7 @@ function Project.on_level_load_pre_flow()
 	if not Project.ui_started then
 
 		if scaleform then
-			scaleform.Stingray.load_project("scroll_test.s2dproj", "ui/scroll_test")
+			scaleform.Stingray.load_project_and_scene("ui/scroll_test.s2d/scroll_test")
 		end
 
 		if GlobalUI then
