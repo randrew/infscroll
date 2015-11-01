@@ -259,13 +259,8 @@ local function update_scroller_data(scroller)
 	local length = scroller.view_size_fn()
 
 	local function detach(view)
-		scroller.view_set_visible_fn(view, false)
 		scroller.set_data_fn(view, nil)
 		scroller.release_view_fn(view)
-	end
-	local function attach(view, datum)
-		scroller.set_data_fn(view, datum)
-		scroller.view_set_visible_fn(view, true)
 	end
 	local function set_pos(view, y_offset)
 		scroller.view_set_position_fn(view, y_offset)
@@ -278,7 +273,7 @@ local function update_scroller_data(scroller)
 	free_unused_views(scroller.dvmap, items, scroller.datum_is_valid_fn, detach)
 	-- For each item that is newly visible, create a new view, or retrieve one
 	-- from the pool.
-	create_views(scroller.dvmap, items, scroller.create_view_fn, attach)
+	create_views(scroller.dvmap, items, scroller.create_view_fn, scroller.set_data_fn)
 	-- For each view, call the procedure to set its visual position.
 	set_positions(scroller.dvmap, items, positions, set_pos)
 
@@ -306,7 +301,6 @@ function Scroller.create(args)
 		create_view_fn=args.view_take,
 		release_view_fn=args.view_release,
 		set_data_fn=args.view_set_data,
-		view_set_visible_fn=args.view_set_visible,
 		view_set_position_fn=args.view_set_position,
 
 		-- TODO better names for these, docs
@@ -319,7 +313,6 @@ end
 function Scroller.reset(scroller)
 	-- Remove all views that are in use (visible, has data set)
 	for d, v in pairs(scroller.dvmap.d_to_v) do
-		scroller.view_set_visible_fn(v, false)
 		scroller.set_data_fn(v, nil)
 		scroller.release_view_fn(v)
 	end

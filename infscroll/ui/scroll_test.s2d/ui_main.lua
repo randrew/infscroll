@@ -22,11 +22,14 @@ local highlighted_view = nil
 local view_pool = {}
 
 local function view_take(idx)
+	local item
 	if #view_pool > 0 then
-		return table.remove(view_pool, #view_pool)
+		item = table.remove(view_pool, #view_pool)
 	else
-		return ListItem.create()
+		item = ListItem.create()
 	end
+	ContainerComponent.add_actor(child_container, item.actor)
+	return item
 end
 
 local function view_destroy(v)
@@ -35,6 +38,7 @@ end
 
 local function view_release(v)
 	table.insert(view_pool, v)
+	ContainerComponent.remove_actor(child_container, v.actor, false)
 end
 
 local function index_measure(state)
@@ -65,14 +69,6 @@ local function view_set_size_and_alpha(v, idx)
 		text_alpha = 1
 	end
 	ListItem.set_alphas(v, base_alpha, text_alpha)
-end
-
-local function view_set_visible(view, is_visible)
-	if is_visible then
-		ContainerComponent.add_actor(child_container, view.actor)
-	else
-		ContainerComponent.remove_actor(child_container, view.actor, false)
-	end
 end
 
 local function view_set_position(view, position)
@@ -136,7 +132,6 @@ local scrolling_list = Scroller.create{
 	view_take=view_take,
 	view_release=view_release,
 	view_set_data=set_state,
-	view_set_visible=view_set_visible,
 	view_set_position=view_set_position
 }
 
